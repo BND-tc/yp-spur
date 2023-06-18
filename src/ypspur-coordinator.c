@@ -52,6 +52,7 @@
 #include <utility.h>
 #include <yprintf.h>
 #include <ping.h>
+#include <blvr.h>
 
 /* ライブラリ用 */
 #include <ypspur.h>
@@ -334,6 +335,15 @@ int main(int argc, char *argv[])
       }
       fflush(stderr);
     }
+    else if ((option(OPTION_BLVR)))
+    {
+      yprintf(OUTPUT_LV_INFO, " Port    : %s \n", param->device_name);
+      if (!blvr_connect(param->device_name))
+      {
+        // quit=0;でbreakしたら異常終了と判断される
+        break;
+      }
+    }
     else
     {
       yprintf(OUTPUT_LV_INFO, " Port    : n/a (--without-device mode)\n");
@@ -479,6 +489,17 @@ int main(int argc, char *argv[])
         spur->wheel_mode_prev[i] = -1;
       }
     }
+    else if ((option(OPTION_BLVR)))
+    {
+      /* サーボをかける */
+      SpurUserParamsPtr spur;
+      spur = get_spur_user_param_ptr();
+      for (i = 0; i < YP_PARAM_MAX_MOTOR_NUM; i++)
+      {
+        spur->wheel_mode[i] = MOTOR_CONTROL_VEL;
+        spur->wheel_mode_prev[i] = -1;
+      }
+    }
 
     yprintf(OUTPUT_LV_INFO, "YP-Spur coordinator started.\n");
 
@@ -489,6 +510,11 @@ int main(int argc, char *argv[])
     if (!(option(OPTION_WITHOUT_DEVICE)))
     {
       init_control_thread(&control_thread);
+      control_thread_en = 1;
+    }
+    else if ((option(OPTION_BLVR)))
+    {
+      blvr_init_control_thread(&control_thread);
       control_thread_en = 1;
     }
     else
@@ -529,6 +555,10 @@ int main(int argc, char *argv[])
       if (!(option(OPTION_WITHOUT_DEVICE)))
       {
         odometry_receive_loop();
+      }
+      else if ((option(OPTION_BLVR)))
+      {
+        blvr_odometry_receive_loop();
       }
       else
       {
@@ -580,6 +610,8 @@ int main(int argc, char *argv[])
 
   if (!(option(OPTION_WITHOUT_DEVICE)))
     serial_close();
+  else if ((option(OPTION_BLVR)))
+    blvr_close();
 
 #ifdef HAVE_SSM
   /* SSM終了処理 */

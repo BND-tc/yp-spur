@@ -158,6 +158,7 @@ add_executable(ypspur-coordinator
   src/odometry.c
   src/param.c
   src/ping.c
+  src/blvr.c
   src/serial.c
   src/ssm_spur_handler.c
   src/utility.c
@@ -166,7 +167,7 @@ add_executable(ypspur-coordinator
   src/ypspur-coordinator.c
 )
 target_link_libraries(ypspur-coordinator
-  carte2d${TARGET_STATIC_POSTFIX} formula-calc${TARGET_STATIC_POSTFIX} m ${THREAD_LIBRARIES}
+  carte2d${TARGET_STATIC_POSTFIX} formula-calc${TARGET_STATIC_POSTFIX} m modbus ${THREAD_LIBRARIES}
 )
 if(SSM_FOUND)
   target_link_libraries(ypspur-coordinator

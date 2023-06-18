@@ -153,6 +153,7 @@ void arg_longhelp(int argc, char *argv[])
   fprintf(stderr, "  --socket <port>          Use socket ipc.\n");
   fprintf(stderr, "  --daemon                 Run in daemon mode.\n");
   fprintf(stderr, "  --ping                   Ping RS485 chained devices.\n");
+  fprintf(stderr, "  --blvr                   Using BLVR\n");
 }
 
 /* 引数の説明 */
@@ -202,6 +203,12 @@ int arg_analyze(int argc, char *argv[])
     else if (!strcmp(argv[i], "--ping"))
     {
       g_param.option |= OPTION_PING;
+    }
+    else if (!strcmp(argv[i], "--blvr"))
+    {
+      g_param.option |= OPTION_BLVR;
+      g_param.option |= OPTION_WITHOUT_DEVICE;
+      g_param.option |= OPTION_DO_NOT_USE_YP;
     }
     else if (!strcmp(argv[i], "--param-help"))
     {
@@ -260,6 +267,14 @@ int arg_analyze(int argc, char *argv[])
       if (i + 1 < argc)
       {
         i++;
+        char *pt;
+        if ((pt=strstr(argv[i], "--blvr"))!=NULL)
+        {
+          g_param.option |= OPTION_BLVR;
+          g_param.option |= OPTION_WITHOUT_DEVICE;
+          g_param.option |= OPTION_DO_NOT_USE_YP;
+          *pt = '\0';
+        }
         strcpy(g_param.device_name, argv[i]);
       }
       else
