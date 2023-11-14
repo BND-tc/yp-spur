@@ -37,6 +37,7 @@ typedef struct _odometry
   double w;
   double time;
   double wvel[YP_PARAM_MAX_MOTOR_NUM];
+  double wvolt[YP_PARAM_MAX_MOTOR_NUM];
   double wang[YP_PARAM_MAX_MOTOR_NUM];
   short enc[YP_PARAM_MAX_MOTOR_NUM];
   int enc_init[YP_PARAM_MAX_MOTOR_NUM];

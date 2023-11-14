@@ -271,6 +271,11 @@ void command(void)
         message_return(&ipcmd, msg.pid, &res_msg);
         yprintf(OUTPUT_LV_DEBUG, "Command: get wheelvel %f %f\n", res_msg.data[0], res_msg.data[1]);
         break;
+      case YPSPUR_GET_WHEEL_VOLT:
+        get_wheel_volt_com(msg.data, res_msg.data, &g_spur);
+        message_return(&ipcmd, msg.pid, &res_msg);
+        yprintf(OUTPUT_LV_DEBUG, "Command: get wheelvolt %f %f\n", res_msg.data[0], res_msg.data[1]);
+        break;
       case YPSPUR_GET_WHEEL_ANG:
         get_wheel_ang_com(msg.data, res_msg.data, &g_spur);
         message_return(&ipcmd, msg.pid, &res_msg);

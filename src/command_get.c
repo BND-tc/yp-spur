@@ -132,6 +132,19 @@ void get_wheel_vel_com(double *data, double *resdata, SpurUserParamsPtr spur)
   // printf("getvel %f %f %f\n",);
 }
 
+void get_wheel_volt_com(double *data, double *resdata, SpurUserParamsPtr spur)
+{
+  OdometryPtr odometry;
+
+  odometry = get_odometry_ptr();
+
+  resdata[0] = odometry->wvolt[0];
+  resdata[1] = odometry->wvolt[1];
+  resdata[2] = odometry->time;
+
+  // printf("getvel %f %f %f\n",);
+}
+
 void get_wheel_ang_com(double *data, double *resdata, SpurUserParamsPtr spur)
 {
   OdometryPtr odometry;

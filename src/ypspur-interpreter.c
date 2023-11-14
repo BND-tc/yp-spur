@@ -73,6 +73,7 @@ typedef struct SPUR_COMMAND
     SPUR_VEL,
     SPUR_WHEEL_VEL,
     SPUR_GET_WHEEL_VEL,
+    SPUR_GET_WHEEL_VOLT,
     SPUR_GET_WHEEL_ANG,
     SPUR_GET_WHEEL_TORQUE,
     SPUR_WHEEL_TORQUE,
@@ -135,6 +136,7 @@ static const SpurCommand SPUR_COMMAND[SPUR_COMMAND_MAX] = {
   { SPUR_VEL, { "vel" }, 2 },
   { SPUR_WHEEL_VEL, { "wheel_vel" }, 2 },
   { SPUR_GET_WHEEL_VEL, { "get_wheel_vel" }, 0 },
+  { SPUR_GET_WHEEL_VOLT, { "get_wheel_volt" }, 0 },
   { SPUR_GET_WHEEL_ANG, { "get_wheel_ang" }, 0 },
   { SPUR_GET_WHEEL_TORQUE, { "get_wheel_torque" }, 0 },
   { SPUR_WHEEL_TORQUE, { "wheel_torque" }, 2 },
@@ -365,6 +367,10 @@ int proc_spur_cmd(char *line, int *coordinate)
       break;
     case SPUR_GET_WHEEL_VEL:
       YP_get_wheel_vel(&spur.arg[0], &spur.arg[1]);
+      printf("%f %f\n", spur.arg[0], spur.arg[1]);
+      break;
+    case SPUR_GET_WHEEL_VOLT:
+      YP_get_wheel_volt(&spur.arg[0], &spur.arg[1]);
       printf("%f %f\n", spur.arg[0], spur.arg[1]);
       break;
     case SPUR_GET_WHEEL_ANG:

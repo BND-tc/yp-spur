@@ -177,6 +177,7 @@ double YP_get_device_error_state(int id, int *err);
 int YP_wheel_vel(double r, double l);
 int YP_wheel_torque(double r, double l);
 double YP_get_wheel_vel(double *wr, double *wl);
+double YP_get_wheel_volt(double *wr, double *wl);
 double YP_get_wheel_ang(double *theta_r, double *theta_l);
 double YP_get_wheel_torque(double *torque_r, double *torque_l);
 int YP_wheel_ang(double r, double l);

@@ -175,7 +175,7 @@ void blvr_init_drive_data_packet(void)
 void blvr_odometry(OdometryPtr xp, double dt, double time)
 {
   double v, w;
-  double wvel[2], mvel[2];
+  double wvel[2], wvolt[2], mvel[2];
   double mtorque[2], wtorque[2];
   double torque_trans, torque_angular;
   int32_t cnt[2],enc[2];
@@ -188,6 +188,8 @@ void blvr_odometry(OdometryPtr xp, double dt, double time)
   enc[1] = g_blvr_odometry_packet.prev_rightMotorPosition;
   mtorque[0] = (double)g_blvr_odometry_packet.leftMotorTorque * 0.1 *p(YP_PARAM_TORQUE_MAX, 0);
   mtorque[1] = (double)g_blvr_odometry_packet.rightMotorTorque * 0.1 *p(YP_PARAM_TORQUE_MAX, 0);
+  wvolt[0] = (double)g_blvr_odometry_packet.leftMotorVolt * 0.1;
+  wvolt[1] = (double)g_blvr_odometry_packet.rightMotorVolt * 0.1;
   int i;
   for (i = 0; i < 2; i++)
   {
@@ -250,6 +252,7 @@ void blvr_odometry(OdometryPtr xp, double dt, double time)
     if (!param->motor_enable[i])
       continue;
     xp->wvel[i] = wvel[i];
+    xp->wvolt[i] = wvolt[i];
     xp->wang[i] = xp->wang[i] + xp->wvel[i] * dt;
     xp->wtorque[i] = wtorque[i];
   }

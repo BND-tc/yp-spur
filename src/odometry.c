@@ -90,6 +90,7 @@ void init_odometry(void)
     g_odometry.wang[i] = 0;
     g_odometry.wtorque[i] = 0;
     g_odometry.wvel[i] = 0;
+    g_odometry.wvolt[i] = 0;
     g_error_state.state[i] = 0;
     g_error_state.time[i] = 0;
   }
@@ -232,7 +233,10 @@ void odometry(OdometryPtr xp, short *cnt, short *pwm, double dt, double time)
   }
   xp->torque_trans = torque_trans;
   xp->torque_angular = torque_angular;
-
+  if(param->admask & 0x80)
+  {
+    xp->wvolt[0] = xp->wvolt[1] = get_addata(7) * 3.3 / 1024 / 10 * 130;
+  }
   /*-PI< <PIに調整*/
   // if(xp->theta <-M_PI)xp->theta += 2*M_PI;
   // if(xp->theta > M_PI)xp->theta -= 2*M_PI;

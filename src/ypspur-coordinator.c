@@ -462,7 +462,12 @@ int main(int argc, char *argv[])
           // 設定成功
           // 正常ならば何もしない
         }
-
+        int tfrog_driver_version;
+        sscanf(version.product, "T-frog Motor Driver rev.%d", &tfrog_driver_version);
+        if(tfrog_driver_version == 5)
+        {
+          param->admask |= 0x80;
+        }
         if (param->admask)
         {
           yprintf(OUTPUT_LV_INFO, "Setting admask to %x.\n", param->admask);

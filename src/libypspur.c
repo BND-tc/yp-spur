@@ -195,6 +195,12 @@ double YP_get_wheel_vel(double *wr, double *wl)
   return YP_md_get_wheel_vel(&spur, wr, wl);
 }
 
+/* 電圧取得 */
+double YP_get_wheel_volt(double *wr, double *wl)
+{
+  return YP_md_get_wheel_volt(&spur, wr, wl);
+}
+
 /* 角度取得 */
 double YP_get_wheel_ang(double *theta_r, double *theta_l)
 {

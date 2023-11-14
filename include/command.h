@@ -130,6 +130,7 @@ int near_pos_com(int cs, double *data, double *resdata, SpurUserParamsPtr spur);
 int near_ang_com(int cs, double *data, double *resdata, SpurUserParamsPtr spur);
 int over_line_com(int cs, double *data, double *resdata, SpurUserParamsPtr spur);
 void get_wheel_vel_com(double *data, double *resdata, SpurUserParamsPtr spur);
+void get_wheel_volt_com(double *data, double *resdata, SpurUserParamsPtr spur);
 void get_wheel_ang_com(double *data, double *resdata, SpurUserParamsPtr spur);
 void get_force_com(int cs, double *data, double *resdata, SpurUserParamsPtr spur);
 void get_wheel_torque_com(int cs, double *data, double *resdata, SpurUserParamsPtr spur);

@@ -183,6 +183,7 @@ double YP_md_get_device_error_state(YPSpur *dev, int id, int *err);
 int YP_md_wheel_vel(YPSpur *dev, double r, double l);
 int YP_md_wheel_torque(YPSpur *dev, double r, double l);
 double YP_md_get_wheel_vel(YPSpur *dev, double *wr, double *wl);
+double YP_md_get_wheel_volt(YPSpur *dev, double *wr, double *wl);
 double YP_md_get_wheel_ang(YPSpur *dev, double *theta_r, double *theta_l);
 double YP_md_get_wheel_torque(YPSpur *dev, double *torque_r, double *torque_l);
 int YP_md_set_wheel_vel(YPSpur *dev, double r, double l);
