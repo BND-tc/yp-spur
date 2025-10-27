@@ -541,7 +541,7 @@ int encode_write(char *data, int len)
   {
     return -1;
   }
-  serial_flush_out();
+  //serial_flush_out();
 
   return 0;
 }
